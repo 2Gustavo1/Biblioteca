@@ -4,10 +4,19 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success" id="success-message">
-            {{session ('success') }}
+        <div class="alert alert-success" id="message">
+            {{ session('success') }}
+        </div>
+    @elseif (session('update'))
+        <div class="alert alert-info" id="message">
+            {{ session('update') }}
+        </div>
+    @elseif (session('delete'))
+        <div class="alert alert-danger" id="message">
+            {{ session('delete') }}
         </div>
     @endif
+
     <div class="mb-4">
         <a href="{{ route('libros.index') }}">
             <button type="button" class="btn btn-secondary">
@@ -48,21 +57,18 @@
             @endforeach
         </tbody>
     </table>
+
     <script>
-        // Espera a que el DOM esté completamente cargado
-        document.addEventListener("DOMContentLoaded", function() {
-            // Obtiene el mensaje
-            const successMessage = document.getElementById('success-message');
-            
-            // Verifica si el mensaje existe
-            if (successMessage) {
-                // Oculta el mensaje después de 5 segundos
-                setTimeout(function() {
-                    successMessage.style.display = 'none';
-                }, 3000); // Cambia 5000 por el número de milisegundos que desees
-            }
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        const message = document.getElementById('message');
+        if (message) {
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 3000);
+        }
+    });
     </script>
+
       
 @endsection
 

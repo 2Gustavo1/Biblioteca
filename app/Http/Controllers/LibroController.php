@@ -18,6 +18,7 @@ class LibroController extends Controller
 
         // Retornar la vista con los libros
         return view('dashboard', compact('libros'));
+
         
     }
 
@@ -29,6 +30,7 @@ class LibroController extends Controller
 
           // Retornar la vista con los libros
           return view('libros.create');
+          return redirect()->back()->with('success', '¡Elemento creado con éxito!');
         
     }
 
@@ -50,7 +52,8 @@ class LibroController extends Controller
         ]);
 
         // Redirigir de vuelta al dashboard con un mensaje de éxito
-        return redirect()->route('libros.index')->with('success', 'Libro creado exitosamente.');   
+        
+        return redirect()->route('libros.ver')->with('success', 'Libro creado exitosamente.');   
     }
 
     /**
@@ -88,7 +91,7 @@ class LibroController extends Controller
         $libro->update($request->all()); // Actualiza el libro
 
     // Redirigir a la lista de libros
-        return redirect()->route('libros.index')->with('success', 'Libro actualizado con éxito.');
+        return redirect()->route('libros.ver')->with('update', 'Libro actualizado con éxito.');
     }
 
     /**
@@ -101,7 +104,7 @@ class LibroController extends Controller
     // Eliminar el libro
         $libro->delete();
     // Redirigir a la lista de libros con un mensaje de éxito
-        return redirect()->route('libros.index')->with('success', 'Libro eliminado con éxito.');
+        return redirect()->route('libros.ver')->with('delete', '¡Elemento eliminado con éxito!');
     }
     
     public function ver(Libro $libro)

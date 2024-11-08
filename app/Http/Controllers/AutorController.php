@@ -46,7 +46,7 @@ class AutorController extends Controller
             'libro_id' => $request->libro_id,  // Incluye libro_id en la creación del autor
         ]);
     
-        return redirect()->route('autores.index')->with('success', 'Autor creado exitosamente.');
+        return redirect()->route('autores.ver')->with('success', 'Autor creado exitosamente.');
     }
     
 
@@ -86,7 +86,7 @@ class AutorController extends Controller
         $autor->update($request->all()); // Actualiza el autor
         
     // Redirigir al listado de autores con un mensaje de éxito
-        return redirect()->route('autores.ver')->with('success', 'Autor actualizado correctamente.');
+        return redirect()->route('autores.ver')->with('update', 'Autor actualizado correctamente.');
     }
 
     
@@ -99,7 +99,7 @@ class AutorController extends Controller
     {
         $autor = autor::findOrFail($id);
         $autor->delete();
-        return redirect()->route('autores.ver')->with('success', 'Autor eliminado correctamente.');
+        return redirect()->route('autores.ver')->with('delete', 'Autor eliminado correctamente.');
     }
 
     public function ver(Autor $autor)

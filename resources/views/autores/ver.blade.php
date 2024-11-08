@@ -4,8 +4,16 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success" id="success-message">
+        <div class="alert alert-success" id="message">
             {{ session('success') }}
+        </div>
+    @elseif (session('update'))
+        <div class="alert alert-info" id="message">
+            {{ session('update') }}
+        </div>
+    @elseif (session('delete'))
+        <div class="alert alert-danger" id="message">
+            {{ session('delete') }}
         </div>
     @endif
 
@@ -52,13 +60,14 @@
     </table>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const successMessage = document.getElementById('success-message');
-            if (successMessage) {
-                setTimeout(function() {
-                    successMessage.style.display = 'none';
-                }, 3000);
-            }
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        const message = document.getElementById('message');
+        if (message) {
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 3000);
+        }
+    });
     </script>
+
 @endsection
